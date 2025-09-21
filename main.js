@@ -16,35 +16,34 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p>${data.about}</p>
             `;
 
-            // Career
-            // Career Timeline
+            // Career Timeline with alternating sides and custom color
             document.getElementById('career').innerHTML = `
                 <h4>Career Timeline</h4>
-                <ul class="timeline">
-                    ${data.experience.map(exp => 
-                        `<li>
-                            <span class="timeline-year">${exp.duration}</span>
-                            <div class="timeline-content">
-                                <strong>${exp.title}</strong> at ${exp.company}
+                <div class="timeline">
+                    ${data.experience.map((exp, idx) => `
+                        <div class="container ${idx % 2 === 0 ? 'left' : 'right'}">
+                            <div class="content" style="border-left: 8px solid #2196F3;">
+                                <h2 style="color:#2196F3">${exp.duration}</h2>
+                                <p><strong>${exp.title}</strong> at ${exp.company}</p>
                             </div>
-                        </li>`
-                    ).join('')}
-                </ul>
+                        </div>
+                    `).join('')}
+                </div>
             `;
 
-            // Education Timeline
+            // Education Timeline with alternating sides and different color
             document.getElementById('education').innerHTML = `
                 <h4>Education Timeline</h4>
-                <ul class="timeline">
-                    ${data.education.map(edu => 
-                        `<li>
-                            <span class="timeline-year">${edu.year}</span>
-                            <div class="timeline-content">
-                                ${edu.degree}, ${edu.institution}
+                <div class="timeline">
+                    ${data.education.map((edu, idx) => `
+                        <div class="container ${idx % 2 === 0 ? 'left' : 'right'}">
+                            <div class="content" style="border-left: 8px solid #4CAF50;">
+                                <h2 style="color:#4CAF50">${edu.startYear} - ${edu.endYear}</h2>
+                                <p>${edu.degree}, ${edu.institution}</p>
                             </div>
-                        </li>`
-                    ).join('')}
-                </ul>
+                        </div>
+                    `).join('')}
+                </div>
             `;
 
             // Skills
