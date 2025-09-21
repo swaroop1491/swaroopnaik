@@ -1,0 +1,59 @@
+{
+  "name": "Swaroop Naik",
+  "contact": {
+    "email": "swaroop.naik@email.com",
+    "phone": "+91-XXXXXXXXXX",
+    "location": "Bengaluru, India"
+  },
+  "about": "Experienced software developer with a passion for building scalable web applications and working across the full stack. Enthusiastic about learning new technologies and contributing to open source.",
+  "experience": [
+    {
+      "title": "Senior Developer",
+      "company": "XYZ Corp",
+      "duration": "2022-Present"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "ABC Ltd",
+      "duration": "2018-2022"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech in Computer Science",
+      "institution": "NIT Karnataka",
+      "year": "2014-2018"
+    }
+  ],
+  "skills": [
+    "JavaScript",
+    "Python",
+    "React",
+    "Node.js",
+    "SQL",
+    "Docker"
+  ],
+  "certificates": [
+    {
+      "name": "AWS Certified Solutions Architect",
+      "year": "2021"
+    },
+    {
+      "name": "Certified Kubernetes Administrator",
+      "year": "2022"
+    }
+  ],
+  "services": [
+    "Web Application Development",
+    "API Integration",
+    "Cloud Deployment"
+  ],
+  "blogs": [
+    {
+      "title": "How to Build REST APIs with Node.js",
+      "url": "#"
+    },
+    {
+      "title": "Getting Started with Docker",
+      "url": "#"
+    }
