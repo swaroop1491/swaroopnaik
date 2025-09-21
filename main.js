@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="content" style="border-left: 8px solid #2196F3;">
                                 <h2 style="color:#2196F3">${exp.duration}</h2>
                                 <p><strong>${exp.title}</strong> at ${exp.company}</p>
+                                <p>${exp.description}</p>
                             </div>
                         </div>
                     `).join('')}
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${data.education.map((edu, idx) => `
                         <div class="container ${idx % 2 === 0 ? 'left' : 'right'}">
                             <div class="content" style="border-left: 8px solid #4CAF50;">
-                                <h2 style="color:#4CAF50">${edu.startYear} - ${edu.endYear}</h2>
+                                <h2 style="color:#4CAF50">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</h2>
                                 <p>${edu.degree}, ${edu.institution}</p>
                             </div>
                         </div>
