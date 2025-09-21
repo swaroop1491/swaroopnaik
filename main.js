@@ -17,21 +17,32 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
 
             // Career
+            // Career Timeline
             document.getElementById('career').innerHTML = `
-                <h4>Career</h4>
-                <ul>
+                <h4>Career Timeline</h4>
+                <ul class="timeline">
                     ${data.experience.map(exp => 
-                        `<li><strong>${exp.title}</strong> at ${exp.company} (${exp.duration})</li>`
+                        `<li>
+                            <span class="timeline-year">${exp.duration}</span>
+                            <div class="timeline-content">
+                                <strong>${exp.title}</strong> at ${exp.company}
+                            </div>
+                        </li>`
                     ).join('')}
                 </ul>
             `;
 
-            // Education
+            // Education Timeline
             document.getElementById('education').innerHTML = `
-                <h4>Education</h4>
-                <ul>
+                <h4>Education Timeline</h4>
+                <ul class="timeline">
                     ${data.education.map(edu => 
-                        `<li>${edu.degree}, ${edu.institution} (${edu.year})</li>`
+                        `<li>
+                            <span class="timeline-year">${edu.year}</span>
+                            <div class="timeline-content">
+                                ${edu.degree}, ${edu.institution}
+                            </div>
+                        </li>`
                     ).join('')}
                 </ul>
             `;
