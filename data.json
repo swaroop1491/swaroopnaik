@@ -1,118 +1,86 @@
 {
-  "name": "Swaroop Naik",
-"contact": {
-    "email": "snaik303@gmail.com",
-    "phone": "+91-9051154993",
-    "location": "Pune, MH, India",
-    "linkedin": {
-        "icon": "linkedin",
-        "src": "https://www.linkedin.com/in/swaroopnaik/"
+    "name": "Swaroop Naik",
+    "contact": {
+        "email": "snaik303@gmail.com",
+        "phone": "+91-9051154993",
+        "location": "Pune, MH, India",
+        "linkedin": {
+            "icon": "linkedin",
+            "src": "https://www.linkedin.com/in/swaroopnaik/"
+        },
+        "x": {
+            "icon": "x",
+            "src": "https://x.com/swaroopnaik"
+        }
     },
-    "x": {
-        "icon": "x",
-        "src": "https://x.com/swaroopnaik"
-    }
-},
     "about": "Experienced software developer with a passion for building scalable web applications and working across the full stack. Enthusiastic about learning new technologies and contributing to open source.",
-    "personalDetails": {
-        "dob": "1991-05-15",
-        "sex": "Male",
-        "maritalStatus": "Married",
-        "children": 1,
-        "hobbies": [
-            "Reading",
-            "Traveling",
-            "Photography",
-            "Cycling"
-        ],
-        "likes": [
-            "Open source",
-            "Problem solving",
-            "Technology",
-            "Music"
-        ],
-        "dislikes": [
-            "Procrastination",
-            "Inefficiency"
-        ]
-    },
-"experience": [
-    {
-        "title": "Product Owner",
-        "company": "Amdocs",
-        "duration": "2023-Present",
-        "description": "Responsible for defining product vision, managing the product backlog, and ensuring successful delivery of features."
-    },
-    {
-        "title": "Scrum Master",
-        "company": "Amdocs",
-        "duration": "2021-2023",
-        "description": "Facilitated agile ceremonies, supported team collaboration, and removed impediments to ensure smooth project execution."
-    },
-    {
-        "title": "Associate Consultant",
-        "company": "Tata Consultancy Services",
-        "duration": "2019-2021",
-        "description": "Provided technical expertise, contributed to solution design, and supported client engagements for various projects."
-    },
-    {
-        "title": "Senior Software Engineer",
-        "company": "Tata Consultancy Services",
-        "duration": "2015-2019",
-        "description": "Led development efforts, mentored junior engineers, and delivered scalable software solutions."
-    },
-    {
-        "title": "Software Engineer",
-        "company": "Tata Consultancy Services",
-        "duration": "2013-2015",
-        "description": "Developed and maintained software applications, collaborated with cross-functional teams, and ensured code quality."
-    }
+    "experience": [
+        {
+            "title": "Product Owner",
+            "company": "Amdocs",
+            "duration": "2023-Present",
+            "description": "Responsible for defining product vision, managing the product backlog, and ensuring successful delivery of features."
+        },
+        {
+            "title": "Scrum Master",
+            "company": "Amdocs",
+            "duration": "2021-2023",
+            "description": "Facilitated agile ceremonies, supported team collaboration, and removed impediments to ensure smooth project execution."
+        },
+        {
+            "title": "Associate Consultant",
+            "company": "Tata Consultancy Services",
+            "duration": "2019-2021",
+            "description": "Provided technical expertise, contributed to solution design, and supported client engagements for various projects."
+        },
+        {
+            "title": "Senior Software Engineer",
+            "company": "Tata Consultancy Services",
+            "duration": "2015-2019",
+            "description": "Led development efforts, mentored junior engineers, and delivered scalable software solutions."
+        },
+        {
+            "title": "Software Engineer",
+            "company": "Tata Consultancy Services",
+            "duration": "2013-2015",
+            "description": "Developed and maintained software applications, collaborated with cross-functional teams, and ensured code quality."
+        }
     ],
-  "education": [
-    {
-      "degree": "MBA",
-      "institution": "IIT ISM, Dhanbad",
-      "startYear": "2016",
-      "endYear": "2019"
-    },
-    {
-      "degree": "B.Tech in Electronics and Communication",
-      "institution": "SRM University, Chennai",
-      "startYear": "2009",
-      "endYear": "2013"
-    }
-  ],
-  "skills": [
-    "JavaScript",
-    "Python",
-    "React",
-    "Node.js",
-    "SQL",
-    "Docker"
-  ],
-  "certificates": [
-    {
-      "name": "AWS Certified Solutions Architect",
-      "year": "2021"
-    },
-    {
-      "name": "Certified Kubernetes Administrator",
-      "year": "2022"
-    }
-  ],
-  "services": [
-    "Web Application Development",
-    "API Integration",
-    "Cloud Deployment"
-  ],
-  "blogs": [
-    {
-      "title": "How to Build REST APIs with Node.js",
-      "url": "#"
-    },
-    {
-      "title": "Getting Started with Docker",
-      "url": "#"
-    }
-  ]
+    "education": [
+        {
+            "degree": "MBA",
+            "institution": "IIT ISM, Dhanbad",
+            "startYear": "2016",
+            "endYear": "2019"
+        },
+        {
+            "degree": "B.Tech in Electronics and Communication",
+            "institution": "SRM University, Chennai",
+            "startYear": "2009",
+            "endYear": "2013"
+        }
+    ],
+    "skills": [
+        "JavaScript",
+        "Python",
+        "React",
+        "Node.js",
+        "SQL",
+        "Docker"
+    ],
+    "certificates": [
+        {
+            "name": "AWS Certified Solutions Architect",
+            "year": "2021"
+        },
+        {
+            "name": "Certified Kubernetes Administrator",
+            "year": "2022"
+        }
+    ],
+    "services": [
+        "Web Application Development",
+        "API Integration",
+        "Cloud Deployment"
+    ]
 }

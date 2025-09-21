@@ -84,11 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Blogs
             document.getElementById('blogs').innerHTML = `
                 <h4>Blogs</h4>
-                <ul>
-                    ${data.blogs.map(blog => 
-                        `<li><a href="${blog.url}">${blog.title}</a></li>`
-                    ).join('')}
-                </ul>
+                <iframe src="https://telcoshots.blogspot.com/" style="width:100%; height:400px; border:none;"></iframe>
             `;
         })
                 .catch(error => {
