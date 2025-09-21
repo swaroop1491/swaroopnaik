@@ -84,5 +84,127 @@
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="main.js"></script>
+    <script>
+        // Particle background effect
+        window.addEventListener('DOMContentLoaded', () => {
+            // Create canvas and set as background
+            const canvas = document.createElement('canvas');
+            canvas.id = 'canvas';
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100vw';
+            canvas.style.height = '100vh';
+            canvas.style.zIndex = '-1';
+            canvas.style.pointerEvents = 'none';
+            document.body.prepend(canvas);
+
+            // Set canvas size to viewport
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            var ctx = canvas.getContext("2d");
+            var W = canvas.width, H = canvas.height;
+            var numParticles = 1000;
+            var particles = [];
+            var maxDistance = 60;
+
+            class Particle {
+                constructor(id) {
+                    this.id = id || 0;
+                    this.x = random(W);
+                    this.y = random(H);
+                    this.vx = random(1, -1);
+                    this.vy = random(1, -1);
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                }
+                checkBoundary() {
+                    if (this.x >= W - 2) {
+                        this.vx = -Math.abs(this.vx);
+                    }
+                    if(this.x <= 2) {
+                        this.vx = Math.abs(this.vx);
+                    }
+                    if (this.y >= H - 2) {
+                        this.vy = -Math.abs(this.vy);
+                    }
+                    if(this.y <= 2) {
+                        this.vy = Math.abs(this.vy);
+                    }
+                }
+                connection() {
+                    for(var i = 0; i < particles.length; ++i) {
+                        if(i > this.id && distance(this, particles[i]) <= maxDistance * 1.5) {
+                            ctx.beginPath();
+                            ctx.moveTo(this.x, this.y);
+                            ctx.lineTo(particles[i].x, particles[i].y);
+                            ctx.lineWidth = 1;
+                            var opacity = 0.5;
+                            var dist = distance(this, particles[i]) - maxDistance;
+                            if(dist > 0) {
+                                var d = maxDistance * 0.5 / dist;
+                                var p = maxDistance * 0.5 * opacity;
+                                opacity = d / p;
+                            }
+                            ctx.strokeStyle = "rgba(255, 255, 255, " + opacity + ")";
+                            ctx.stroke();
+                        }
+                    }
+                }
+                render() {
+                    this.update();
+                    this.checkBoundary();
+                    this.connection();
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 2, 0, 2 * Math.PI);
+                    ctx.fillStyle = 'grey';
+                    ctx.fill();   
+                }
+            }
+
+            function random(max, min = 0) {
+                return Math.random() * (max - min) + min;
+            }
+
+            function distance(p1, p2) {
+                var dx = p2.x - p1.x;
+                var dy = p2.y - p1.y;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+
+            // Initialize particles
+            function initParticles() {
+                particles = [];
+                W = canvas.width;
+                H = canvas.height;
+                for(var i = 0; i < numParticles; ++i) {
+                    var p = new Particle(i);
+                    particles.push(p);
+                }
+            }
+            initParticles();
+
+            // Re-init particles on resize
+            window.addEventListener('resize', () => {
+                W = canvas.width;
+                H = canvas.height;
+                initParticles();
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, W, H);
+                particles.forEach(p => p.render());
+                requestAnimationFrame(animate);
+            }
+            animate();
+        });
+    </script>
 </body>
 </html>
