@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="timeline">
                     ${data.experience.map((exp, idx) => `
                         <div class="container ${idx % 2 === 0 ? 'left' : 'right'}">
-                            <div class="content" style="border-left: 8px solid #2196F3;">
+                            <div class="content" style="border-left: 8px solid #2196F3; padding: 10px;">
                                 <h2 style="color:#2196F3">${exp.duration}</h2>
                                 <p><strong>${exp.title}</strong> at ${exp.company}</p>
                                 <p>${exp.description}</p>
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="timeline">
                     ${data.education.map((edu, idx) => `
                         <div class="container ${idx % 2 === 0 ? 'left' : 'right'}">
-                            <div class="content" style="border-left: 8px solid #4CAF50;">
+                            <div class="content" style="border-left: 8px solid #4CAF50; padding: 10px;">
                                 <h2 style="color:#4CAF50">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</h2>
                                 <p>${edu.degree}, ${edu.institution}</p>
                             </div>
