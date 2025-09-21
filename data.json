@@ -1,11 +1,41 @@
 {
   "name": "Swaroop Naik",
-  "contact": {
+"contact": {
     "email": "snaik303@gmail.com",
     "phone": "+91-9051154993",
-    "location": "Pune, MH, India"
-  },
-  "about": "Experienced software developer with a passion for building scalable web applications and working across the full stack. Enthusiastic about learning new technologies and contributing to open source.",
+    "location": "Pune, MH, India",
+    "linkedin": {
+        "icon": "linkedin",
+        "src": "https://www.linkedin.com/in/swaroopnaik/"
+    },
+    "x": {
+        "icon": "x",
+        "src": "https://x.com/swaroopnaik"
+    }
+},
+    "about": "Experienced software developer with a passion for building scalable web applications and working across the full stack. Enthusiastic about learning new technologies and contributing to open source.",
+    "personalDetails": {
+        "dob": "1991-05-15",
+        "sex": "Male",
+        "maritalStatus": "Married",
+        "children": 1,
+        "hobbies": [
+            "Reading",
+            "Traveling",
+            "Photography",
+            "Cycling"
+        ],
+        "likes": [
+            "Open source",
+            "Problem solving",
+            "Technology",
+            "Music"
+        ],
+        "dislikes": [
+            "Procrastination",
+            "Inefficiency"
+        ]
+    },
 "experience": [
     {
         "title": "Product Owner",

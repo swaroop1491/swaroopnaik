@@ -7,7 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector('.text-center p').innerHTML = `
                 <strong>Email:</strong> ${data.contact.email} |
                 <strong>Phone:</strong> ${data.contact.phone} |
-                <strong>Location:</strong> ${data.contact.location}
+                <strong>Location:</strong> ${data.contact.location} |
+                <a href="${data.contact.linkedin}" target="_blank" title="LinkedIn" style="margin-left:8px;">
+                    <img src="${data.contact.linkedinIcon}" alt="LinkedIn" style="width:20px;vertical-align:middle;">
+                </a>
+                <a href="${data.contact.x}" target="_blank" title="X" style="margin-left:8px;">
+                    <img src="${data.contact.xIcon}" alt="X" style="width:20px;vertical-align:middle;">
+                </a>
             `;
 
             // About
