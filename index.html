@@ -91,6 +91,7 @@
             const canvas = document.createElement('canvas');
             canvas.id = 'canvas';
             canvas.style.position = 'fixed';
+            canvas.style.background = '#0d1117';
             canvas.style.top = '0';
             canvas.style.left = '0';
             canvas.style.width = '100vw';
@@ -109,9 +110,9 @@
 
             var ctx = canvas.getContext("2d");
             var W = canvas.width, H = canvas.height;
-            var numParticles = 1000;
+            var numParticles = 500;
             var particles = [];
-            var maxDistance = 60;
+            var maxDistance = 90;
 
             class Particle {
                 constructor(id) {
