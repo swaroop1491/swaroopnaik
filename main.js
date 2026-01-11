@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         setTimeout(() => { isBlinking = false; }, 120);
                     }
 
-                    // waving: continuous subtle sine
-                    wavePhase = (wavePhase + dt * 2.2) % (Math.PI * 2);
-                    const waveAngle = Math.sin(wavePhase) * 0.7; // radians
+                    // waving: continuous subtle sine (stronger amplitude for visible motion)
+                    wavePhase = (wavePhase + dt * 2.6) % (Math.PI * 2);
+                    const waveAngle = Math.sin(wavePhase) * 1.1; // radians
 
                     const cx = size / 2;
                     const cy = size / 2 - 6;
@@ -95,14 +95,28 @@ document.addEventListener("DOMContentLoaded", function () {
                     roundRect(ctx, cx + eyeXOffset - eyeW / 2, eyeY - eyeH / 2, eyeW, eyeH, 8);
                     ctx.fill();
 
-                    // pupils
-                    ctx.fillStyle = '#2b2b2b';
-                    ctx.beginPath();
-                    ctx.arc(cx - eyeXOffset, eyeY, headR * 0.06, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.beginPath();
-                    ctx.arc(cx + eyeXOffset, eyeY, headR * 0.06, 0, Math.PI * 2);
-                    ctx.fill();
+                    // pupils (hide when blinking)
+                    if (!isBlinking) {
+                        ctx.fillStyle = '#2b2b2b';
+                        ctx.beginPath();
+                        ctx.arc(cx - eyeXOffset, eyeY, headR * 0.06, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(cx + eyeXOffset, eyeY, headR * 0.06, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else {
+                        // draw subtle eyelid line when blinking
+                        ctx.strokeStyle = 'rgba(50,50,50,0.65)';
+                        ctx.lineWidth = Math.max(2, headR * 0.06);
+                        ctx.beginPath();
+                        ctx.moveTo(cx - eyeXOffset - eyeW / 2 + 4, eyeY);
+                        ctx.lineTo(cx - eyeXOffset + eyeW / 2 - 4, eyeY);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(cx + eyeXOffset - eyeW / 2 + 4, eyeY);
+                        ctx.lineTo(cx + eyeXOffset + eyeW / 2 - 4, eyeY);
+                        ctx.stroke();
+                    }
 
                     // mouth (smile)
                     ctx.beginPath();
