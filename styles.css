@@ -14,29 +14,33 @@ h1{background:linear-gradient(90deg,var(--accent), #8ec5ff);-webkit-background-c
 /* Timeline styles */
 .timeline{position:relative;padding:3rem 0;perspective:1200px}
 .timeline::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:6px;height:100%;background:linear-gradient(180deg, rgba(79,140,255,0.18), rgba(79,140,255,0.06));border-radius:6px;box-shadow:0 6px 30px rgba(79,140,255,0.06)}
-.timeline .container{position:relative;width:100%;padding:1rem 0;opacity:0;transform:translateY(40px) rotateX(18deg) translateZ(-80px);transform-origin:center;animation:reveal .9s cubic-bezier(.2,.9,.2,1) forwards}
-.timeline .container .inner{position:relative;width:min(880px,92%);margin:0 auto;display:flex;align-items:flex-start;gap:1rem}
+.timeline .container{position:relative;width:50%;padding:1rem 2rem;box-sizing:border-box;opacity:0;transform:translateY(28px);animation:reveal .7s cubic-bezier(.2,.9,.2,1) forwards}
+.timeline .container.left{left:0}
+.timeline .container.right{left:50%}
+.timeline .container .inner{position:relative;width:100%;display:flex;align-items:flex-start;gap:1rem}
 .timeline .container.left .inner{justify-content:flex-end}
 .timeline .container.right .inner{justify-content:flex-start}
 .timeline .container .content{background:linear-gradient(180deg, rgba(255,255,255,0.86), rgba(250,252,255,0.74));padding:18px;border-radius:14px;backdrop-filter: blur(8px);box-shadow:0 18px 60px rgba(20,30,60,0.08);transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s cubic-bezier(.2,.9,.2,1);position:relative}
 .timeline .container .content h2{margin:0 0 .5rem;font-size:1rem}
 .timeline .container .content p{margin:0}
-.timeline .container.left .content{transform:translateX(-12px)}
-.timeline .container.right .content{transform:translateX(12px)}
-.timeline .container::before{content:'';position:absolute;top:18px;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff, var(--accent));box-shadow:0 8px 30px rgba(79,140,255,0.2);filter:drop-shadow(0 6px 18px rgba(79,140,255,0.12))}
+ .timeline .container.left .content{transform:translateX(-6px);margin-right:28px;text-align:right}
+ .timeline .container.right .content{transform:translateX(6px);margin-left:28px;text-align:left}
+ .timeline .container::before{content:'';position:absolute;top:28px;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff, var(--accent));box-shadow:0 8px 30px rgba(79,140,255,0.2);filter:drop-shadow(0 6px 18px rgba(79,140,255,0.12))}
+ .timeline .container.left::before{right:-9px}
+ .timeline .container.right::before{left:-9px}
 
-/* reveal stagger using variable --i */
-.timeline .container{animation-delay:calc(var(--i, 0) * 110ms)}
-@keyframes reveal{to{opacity:1;transform:translateY(0) rotateX(0) translateZ(0)}}
+ /* reveal stagger using variable --i */
+ .timeline .container{animation-delay:calc(var(--i, 0) * 110ms)}
+ @keyframes reveal{to{opacity:1;transform:translateY(0) rotateX(0) translateZ(0)}}
 
-/* 'Out of world' pop animation for content */
-.timeline .container.in-view .content{transform:translateY(-8px) rotateX(0) translateZ(18px);box-shadow:0 32px 80px rgba(20,30,60,0.16)}
-.timeline .container .content::after{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0));mix-blend-mode:overlay;opacity:0;transition:opacity .6s}
-.timeline .container.in-view .content::after{opacity:1}
+ /* 'Out of world' pop animation for content */
+ .timeline .container.in-view .content{transform:translateY(-8px) rotateX(0) translateZ(18px);box-shadow:0 32px 80px rgba(20,30,60,0.16)}
+ .timeline .container .content::after{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0));mix-blend-mode:overlay;opacity:0;transition:opacity .6s}
+ .timeline .container.in-view .content::after{opacity:1}
 
-/* marker orbit animation */
-.timeline .container::before{animation:orbit 3.6s linear infinite}
-@keyframes orbit{0%{transform:translateX(-50%) scale(1) rotate(0deg)}50%{transform:translateX(-50%) scale(1.06) rotate(180deg)}100%{transform:translateX(-50%) scale(1) rotate(360deg)}}
+ /* marker orbit animation */
+ .timeline .container::before{animation:orbit 3.6s linear infinite}
+ @keyframes orbit{0%{transform:translateX(0) scale(1) rotate(0deg)}50%{transform:translateX(0) scale(1.06) rotate(180deg)}100%{transform:translateX(0) scale(1) rotate(360deg)}}
 
 /* Skills */
 .skill{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem}
