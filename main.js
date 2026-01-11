@@ -10,9 +10,148 @@ document.addEventListener("DOMContentLoaded", function () {
                 <strong>Location:</strong> ${data.contact.location}
             `;
 
-            // Set avatar using Dicebear avatars (deterministic by name)
-            const avatar = document.getElementById('avatar');
-            avatar.src = `https://api.dicebear.com/8.x/pixel-art/png?seed=${encodeURIComponent(data.name)}&scale=90`;
+            // Animated avatar: replace static image with a canvas-based face
+            const avatarCanvas = document.getElementById('avatarCanvas');
+            if (avatarCanvas && avatarCanvas.getContext) {
+                const ctx = avatarCanvas.getContext('2d');
+                let DPR = window.devicePixelRatio || 1;
+                function resizeCanvas() {
+                    const size = 220;
+                    avatarCanvas.style.width = size + 'px';
+                    avatarCanvas.style.height = size + 'px';
+                    avatarCanvas.width = Math.floor(size * DPR);
+                    avatarCanvas.height = Math.floor(size * DPR);
+                    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+                }
+                resizeCanvas();
+                window.addEventListener('resize', () => { DPR = window.devicePixelRatio || 1; resizeCanvas(); });
+
+                let last = 0;
+                let blinkTimer = 0;
+                let isBlinking = false;
+                let wavePhase = 0; // controls waving arm
+
+                function drawFace(now) {
+                    const t = now / 1000;
+                    const size = Math.min(220, avatarCanvas.clientWidth);
+                    ctx.clearRect(0, 0, avatarCanvas.width, avatarCanvas.height);
+
+                    // smooth time
+                    const dt = Math.min(0.05, (now - last) / 1000 || 0);
+                    last = now;
+
+                    // blinking logic: blink every 3-6s
+                    blinkTimer -= dt;
+                    if (blinkTimer <= 0) {
+                        isBlinking = true;
+                        blinkTimer = 3 + Math.random() * 3;
+                        setTimeout(() => { isBlinking = false; }, 120);
+                    }
+
+                    // waving: continuous subtle sine
+                    wavePhase = (wavePhase + dt * 2.2) % (Math.PI * 2);
+                    const waveAngle = Math.sin(wavePhase) * 0.7; // radians
+
+                    const cx = size / 2;
+                    const cy = size / 2 - 6;
+                    const headR = size * 0.38;
+
+                    // background subtle radial
+                    const g = ctx.createLinearGradient(0, 0, size, size);
+                    g.addColorStop(0, 'rgba(255,255,255,0.06)');
+                    g.addColorStop(1, 'rgba(255,255,255,0)');
+                    ctx.fillStyle = g;
+                    ctx.fillRect(0, 0, size, size);
+
+                    // head
+                    ctx.beginPath();
+                    ctx.fillStyle = '#ffeccf';
+                    ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+                    ctx.lineWidth = 2;
+                    ctx.arc(cx, cy, headR, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // cheeks
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(255,120,120,0.12)';
+                    ctx.arc(cx - headR * 0.45, cy + headR * 0.18, headR * 0.12, 0, Math.PI * 2);
+                    ctx.arc(cx + headR * 0.45, cy + headR * 0.18, headR * 0.12, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // eyes (blinking)
+                    const eyeY = cy - headR * 0.12;
+                    const eyeXOffset = headR * 0.36;
+                    const eyeW = headR * 0.24;
+                    const eyeH = isBlinking ? 2 : headR * 0.14;
+
+                    ctx.fillStyle = '#fff';
+                    // left eye
+                    ctx.beginPath();
+                    roundRect(ctx, cx - eyeXOffset - eyeW / 2, eyeY - eyeH / 2, eyeW, eyeH, 8);
+                    ctx.fill();
+                    // right eye
+                    ctx.beginPath();
+                    roundRect(ctx, cx + eyeXOffset - eyeW / 2, eyeY - eyeH / 2, eyeW, eyeH, 8);
+                    ctx.fill();
+
+                    // pupils
+                    ctx.fillStyle = '#2b2b2b';
+                    ctx.beginPath();
+                    ctx.arc(cx - eyeXOffset, eyeY, headR * 0.06, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(cx + eyeXOffset, eyeY, headR * 0.06, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // mouth (smile)
+                    ctx.beginPath();
+                    ctx.strokeStyle = 'rgba(50,50,50,0.7)';
+                    ctx.lineWidth = 3;
+                    const mouthW = headR * 0.9;
+                    const mouthH = headR * 0.28;
+                    ctx.arc(cx, cy + headR * 0.25, mouthW / 2, Math.PI * 0.15, Math.PI * 0.85);
+                    ctx.stroke();
+
+                    // left arm (static)
+                    // right arm waving: shoulder at right-bottom of head
+                    const shoulderX = cx + headR * 0.8;
+                    const shoulderY = cy + headR * 0.1;
+                    // draw upper arm (rotating)
+                    ctx.save();
+                    ctx.translate(shoulderX, shoulderY);
+                    ctx.rotate(waveAngle);
+                    // upper arm
+                    ctx.fillStyle = '#f6d8b0';
+                    roundRect(ctx, 0, -6, headR * 0.9, headR * 0.22, headR * 0.12);
+                    // hand
+                    ctx.beginPath();
+                    ctx.arc(headR * 0.9 + 6, 0, headR * 0.16, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+
+                    // hair accent
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(30,60,120,0.06)';
+                    ctx.ellipse(cx - headR * 0.32, cy - headR * 0.8, headR * 0.9, headR * 0.6, -0.6, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    requestAnimationFrame(drawFace);
+                }
+
+                // tiny helper for rounded rect
+                function roundRect(ctx, x, y, w, h, r) {
+                    const radius = Math.min(r, h / 2, w / 2);
+                    ctx.moveTo(x + radius, y);
+                    ctx.arcTo(x + w, y, x + w, y + h, radius);
+                    ctx.arcTo(x + w, y + h, x, y + h, radius);
+                    ctx.arcTo(x, y + h, x, y, radius);
+                    ctx.arcTo(x, y, x + w, y, radius);
+                    ctx.closePath();
+                }
+
+                requestAnimationFrame(drawFace);
+            }
 
             // Set LinkedIn button
             const linkedinHref = data.contact.linkedin && (data.contact.linkedin.src || data.contact.linkedin);
