@@ -24,6 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 linkedinBtn.style.display = 'none';
             }
 
+            // Contact button opens mail client to your address
+            const contactBtn = document.getElementById('contactBtn');
+            if (contactBtn) {
+                const mail = 'snaik303@gmail.com';
+                const subject = encodeURIComponent('Message from website');
+                const body = encodeURIComponent('\n\n--\nSent from profile site');
+                contactBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
+                });
+            }
+
             // About
             document.getElementById('about').innerHTML = `
                 <h4>About</h4>
@@ -36,9 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="timeline">
                     ${data.experience.map((exp, idx) => `
                         <div class="container ${idx % 2 === 0 ? 'left' : 'right'}" style="--i:${idx}">
-                            <div class="content" style="border-left: 6px solid var(--accent); padding: 10px;">
-                                <h2 style="color:var(--accent)">${exp.duration}</h2>
-                                <p><strong>${exp.title}</strong> at ${exp.company}</p>
+                            <div class="content" style="border-left: 6px solid var(--accent); padding: 12px 14px;">
+                                <div class="meta">${exp.duration}</div>
+                                <h3 class="job-title">${exp.title}</h3>
+                                <div class="company">${exp.company}</div>
                                 <p>${exp.description}</p>
                             </div>
                         </div>
@@ -52,9 +65,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="timeline">
                     ${data.education.map((edu, idx) => `
                         <div class="container ${idx % 2 === 0 ? 'left' : 'right'}" style="--i:${idx}">
-                            <div class="content" style="border-left: 6px solid var(--accent-2); padding: 10px;">
-                                <h2 style="color:var(--accent-2)">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</h2>
-                                <p>${edu.degree}, ${edu.institution}</p>
+                            <div class="content" style="border-left: 6px solid var(--accent-2); padding: 12px 14px;">
+                                <div class="meta">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</div>
+                                <h3 class="job-title">${edu.degree}</h3>
+                                <div class="company">${edu.institution}</div>
                             </div>
                         </div>
                     `).join('')}
@@ -63,7 +77,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Skills with animated bars
             const skillPercents = {
-                'JavaScript': 92,'Python':88,'React':90,'Node.js':86,'SQL':80,'Docker':78
+                'JavaScript': 92,
+                'Python': 88,
+                'React': 90,
+                'Node.js': 86,
+                'SQL': 80,
+                'Docker': 78,
+                'Scrum Master': 88,
+                'Product Owner': 90,
+                'Agile Methodologies': 90,
+                'Sprint Planning': 86,
+                'Backlog Management': 88,
+                'User Stories': 85,
+                'Acceptance Criteria': 84,
+                'Sprint Retrospectives': 82,
+                'Stakeholder Management': 87,
+                'Roadmapping': 86,
+                'Prioritization': 88,
+                'JIRA': 86,
+                'Confluence': 82,
+                'Release Planning': 84,
+                'Cross-functional Leadership': 88,
+                'Product Strategy': 86,
+                'Metrics & KPIs': 82,
+                'OKRs': 80,
+                'User Research': 78,
+                'UX Collaboration': 76,
+                'Requirement Analysis': 85,
+                'Facilitation': 84,
+                'Coaching': 80,
+                'Communication': 90
             };
             document.getElementById('skills').innerHTML = `
                 <h4>Skills</h4>
