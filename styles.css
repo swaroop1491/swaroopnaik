@@ -14,12 +14,30 @@ h1{background:linear-gradient(90deg,var(--accent), #8ec5ff);-webkit-background-c
 /* Timeline styles */
 .timeline{position:relative;padding:3rem 0;perspective:1200px}
 .timeline::after{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:6px;height:100%;background:linear-gradient(180deg, rgba(79,140,255,0.18), rgba(79,140,255,0.06));border-radius:6px;box-shadow:0 6px 30px rgba(79,140,255,0.06)}
-.timeline .container{position:relative;width:50%;padding:1rem 2rem;box-sizing:border-box;opacity:0;transform:translateY(28px);animation:reveal .7s cubic-bezier(.2,.9,.2,1) forwards}
-.timeline .container.left{left:0}
-.timeline .container.right{left:50%}
-.timeline .container .inner{position:relative;width:100%;display:flex;align-items:flex-start;gap:1rem}
-.timeline .container.left .inner{justify-content:flex-end}
-.timeline .container.right .inner{justify-content:flex-start}
+.timeline .container{position:relative;width:50%;padding:1rem 2rem;box-sizing:border-box}
+.timeline-item{position:relative;width:50%;padding:1rem 2rem;box-sizing:border-box}
+.timeline-item.left{left:0}
+.timeline-item.right{left:50%}
+.timeline-item .date{position:absolute;left:50%;top:10px;transform:translateX(-50%);background:#fff;border:2px solid var(--accent);color:var(--accent);padding:6px 8px;border-radius:20px;font-weight:600;font-size:.85rem}
+.timeline-item .dot{position:absolute;left:50%;top:28px;transform:translateX(-50%);width:14px;height:14px;background:var(--accent);border-radius:50%;box-shadow:0 6px 20px rgba(79,140,255,0.18)}
+.timeline-item .card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 30px rgba(20,30,60,0.06);max-width:420px}
+.timeline-item.left .card{margin-left:auto;margin-right:48px;text-align:right}
+.timeline-item.right .card{margin-left:48px;margin-right:auto;text-align:left}
+
+/* slide-in animations like the CodePen reference */
+.timeline-item{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+.timeline-item.in-view{opacity:1;transform:translateY(0)}
+.timeline-item.left.in-view{transform:translateX(-10px) translateY(0)}
+.timeline-item.right.in-view{transform:translateX(10px) translateY(0)}
+
+/* adjust marker when small screens */
+@media(max-width:768px){
+  .timeline::after{left:18px;transform:none}
+  .timeline-item{width:100%;left:0;padding-left:56px}
+  .timeline-item .card{margin:0 0 18px 24px;text-align:left}
+  .timeline-item .date{left:18px;transform:none}
+  .timeline-item .dot{left:18px;transform:none}
+}
 .timeline .container .content{background:linear-gradient(180deg, rgba(255,255,255,0.86), rgba(250,252,255,0.74));padding:18px;border-radius:14px;backdrop-filter: blur(8px);box-shadow:0 18px 60px rgba(20,30,60,0.08);transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .45s cubic-bezier(.2,.9,.2,1);position:relative}
 .timeline .container .content h2{margin:0 0 .5rem;font-size:1rem}
 .timeline .container .content p{margin:0}

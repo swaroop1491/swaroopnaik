@@ -195,37 +195,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p>${data.about}</p>
             `;
 
-            // Career Timeline with alternating sides and custom color
+            // Career Timeline with alternating sides and CodePen-like layout
             document.getElementById('career').innerHTML = `
                 <h4>Career Timeline</h4>
                 <div class="timeline">
                     ${data.experience.map((exp, idx) => `
-                        <div class="container ${idx % 2 === 0 ? 'left' : 'right'}" style="--i:${idx}">
-                            <div class="inner">
-                                <div class="content" style="border-left: 6px solid var(--accent); padding: 12px 14px;">
-                                    <div class="meta">${exp.duration}</div>
-                                    <h3 class="job-title">${exp.title}</h3>
-                                    <div class="company">${exp.company}</div>
-                                    <p>${exp.description}</p>
-                                </div>
+                        <div class="timeline-item ${idx % 2 === 0 ? 'left' : 'right'}" data-i="${idx}">
+                            <div class="date">${exp.duration}</div>
+                            <div class="dot"></div>
+                            <div class="card">
+                                <h3 class="job-title">${exp.title}</h3>
+                                <div class="company">${exp.company}</div>
+                                <p>${exp.description}</p>
                             </div>
                         </div>
                     `).join('')}
                 </div>
             `;
 
-            // Education Timeline with alternating sides and different color
+            // Education Timeline with alternating sides and CodePen-like layout
             document.getElementById('education').innerHTML = `
                 <h4>Education Timeline</h4>
                 <div class="timeline">
                     ${data.education.map((edu, idx) => `
-                        <div class="container ${idx % 2 === 0 ? 'left' : 'right'}" style="--i:${idx}">
-                            <div class="inner">
-                                <div class="content" style="border-left: 6px solid var(--accent-2); padding: 12px 14px;">
-                                    <div class="meta">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</div>
-                                    <h3 class="job-title">${edu.degree}</h3>
-                                    <div class="company">${edu.institution}</div>
-                                </div>
+                        <div class="timeline-item ${idx % 2 === 0 ? 'left' : 'right'}" data-i="${idx}">
+                            <div class="date">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</div>
+                            <div class="dot"></div>
+                            <div class="card">
+                                <h3 class="job-title">${edu.degree}</h3>
+                                <div class="company">${edu.institution}</div>
                             </div>
                         </div>
                     `).join('')}
@@ -301,15 +299,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <iframe src="https://telcoshots.blogspot.com/" style="width:100%; height:420px; border:none; border-radius:8px; overflow:hidden"></iframe>
             `;
 
-            // IntersectionObserver to trigger timeline 'in-view' animations
+            // IntersectionObserver to trigger timeline 'in-view' animations for new structure
             const obs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('in-view');
                     }
                 });
-            }, {threshold: 0.25});
-            document.querySelectorAll('.timeline .container').forEach(el => obs.observe(el));
+            }, {threshold: 0.22});
+            document.querySelectorAll('.timeline-item').forEach(el => obs.observe(el));
         })
         .catch(error => {
             console.error('Error fetching data:', error);
