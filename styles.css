@@ -40,6 +40,23 @@ h1{background:linear-gradient(90deg,var(--accent), #8ec5ff);-webkit-background-c
 .tab-pane{opacity:0;transform:translateY(10px);transition:opacity .45s ease, transform .45s ease}
 .tab-pane.show.active{opacity:1;transform:translateY(0)}
 
+/* Timeline improvements */
+.timeline .container .job-title{font-size:1.05rem;margin:0 0 .25rem;font-weight:700}
+.timeline .container .company{font-size:.95rem;color:#2d2d2d;opacity:.9;margin:0 0 .5rem}
+.timeline .container .meta{font-size:.85rem;color:#5b6b85;margin-bottom:.6rem}
+.timeline .container .content:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 14px 40px rgba(20,30,60,0.12)}
+
+/* Contact button specifics */
+.hero-cta a.btn{padding:.45rem .8rem;border-radius:999px}
+.hero-cta a#contactBtn{background:linear-gradient(90deg,var(--accent),#6cb2ff);border:0;color:#fff}
+
+/* Make timeline cards full width on small screens with clearer markers */
+@media(max-width:768px){
+  .timeline::after{left:18px}
+  .timeline .container{padding-left:56px}
+  .timeline .container::before{left:18px}
+}
+
 /* responsive */
 @media(max-width:768px){
   .timeline::after{left:8px}
