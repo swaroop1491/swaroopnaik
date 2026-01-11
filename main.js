@@ -48,11 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="timeline">
                     ${data.experience.map((exp, idx) => `
                         <div class="container ${idx % 2 === 0 ? 'left' : 'right'}" style="--i:${idx}">
-                            <div class="content" style="border-left: 6px solid var(--accent); padding: 12px 14px;">
-                                <div class="meta">${exp.duration}</div>
-                                <h3 class="job-title">${exp.title}</h3>
-                                <div class="company">${exp.company}</div>
-                                <p>${exp.description}</p>
+                            <div class="inner">
+                                <div class="content" style="border-left: 6px solid var(--accent); padding: 12px 14px;">
+                                    <div class="meta">${exp.duration}</div>
+                                    <h3 class="job-title">${exp.title}</h3>
+                                    <div class="company">${exp.company}</div>
+                                    <p>${exp.description}</p>
+                                </div>
                             </div>
                         </div>
                     `).join('')}
@@ -65,10 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="timeline">
                     ${data.education.map((edu, idx) => `
                         <div class="container ${idx % 2 === 0 ? 'left' : 'right'}" style="--i:${idx}">
-                            <div class="content" style="border-left: 6px solid var(--accent-2); padding: 12px 14px;">
-                                <div class="meta">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</div>
-                                <h3 class="job-title">${edu.degree}</h3>
-                                <div class="company">${edu.institution}</div>
+                            <div class="inner">
+                                <div class="content" style="border-left: 6px solid var(--accent-2); padding: 12px 14px;">
+                                    <div class="meta">${edu.startYear || 'N/A'} - ${edu.endYear || 'N/A'}</div>
+                                    <h3 class="job-title">${edu.degree}</h3>
+                                    <div class="company">${edu.institution}</div>
+                                </div>
                             </div>
                         </div>
                     `).join('')}
@@ -143,6 +147,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h4>Blogs</h4>
                 <iframe src="https://telcoshots.blogspot.com/" style="width:100%; height:420px; border:none; border-radius:8px; overflow:hidden"></iframe>
             `;
+
+            // IntersectionObserver to trigger timeline 'in-view' animations
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, {threshold: 0.25});
+            document.querySelectorAll('.timeline .container').forEach(el => obs.observe(el));
         })
         .catch(error => {
             console.error('Error fetching data:', error);
